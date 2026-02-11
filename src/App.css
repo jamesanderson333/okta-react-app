@@ -8,44 +8,65 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #0d1b0d;
+  color: #e0ffe0;
   font-size: 16px;
   line-height: 1.5;
 }
 
 .App {
   min-height: 100vh;
-  background-color: #000000;
+  background: linear-gradient(135deg, #0d1b0d 0%, #1a3d1a 50%, #0d1b0d 100%);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* Scrollbar styling */
+/* Scrollbar styling - Viper theme */
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #0d1b0d;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #fa6600;
-  border-radius: 0;
+  background: #9acd32;
+  border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #e65200;
+  background: #7cfc00;
 }
 
 /* Global heading styles */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 900;
-  letter-spacing: normal;
+  letter-spacing: 0.02em;
   line-height: 1.2;
+  color: #9acd32;
+  text-shadow: 0 0 10px rgba(154, 205, 50, 0.3);
+}
+
+/* Snake scale pattern overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(154, 205, 50, 0.02) 20px,
+      rgba(154, 205, 50, 0.02) 40px
+    );
+  pointer-events: none;
+  z-index: 0;
 }

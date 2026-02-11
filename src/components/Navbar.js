@@ -15,60 +15,43 @@ const Navbar = () => {
   };
 
   return (
-    <>
-      {/* Utility Navigation */}
-      <div className="utility-nav">
-        <div className="utility-container">
-          <div className="utility-links">
-            <Link to="/profile" className="utility-link">Documentation</Link>
-            <Link to="/tokens" className="utility-link">Pricing</Link>
-            <a href="#support" className="utility-link">Support</a>
-          </div>
-          <div className="utility-auth">
-            {authState?.isAuthenticated ? (
-              <>
-                <span className="utility-user">
-                  {authState.idToken?.claims.name || authState.idToken?.claims.email}
-                </span>
-                <button onClick={handleLogout} className="utility-button">
-                  Logout
-                </button>
-              </>
-            ) : (
-              <button onClick={handleLogin} className="utility-button">
-                Sign In
+    <nav className="navbar">
+      <div className="navbar-container">
+        <Link to="/" className="navbar-logo">
+          <svg className="viper-icon" width="40" height="40" viewBox="0 0 100 100" fill="none">
+            <path d="M50 10 L30 30 L20 50 L30 70 L50 90 L70 70 L80 50 L70 30 Z" fill="#9acd32" stroke="#7cfc00" strokeWidth="2"/>
+            <circle cx="40" cy="40" r="5" fill="#ffd700"/>
+            <circle cx="60" cy="40" r="5" fill="#ffd700"/>
+            <path d="M35 55 Q50 65 65 55" stroke="#0d1b0d" strokeWidth="3" fill="none"/>
+          </svg>
+          <span className="logo-text">VIPER</span>
+        </Link>
+        <ul className="navbar-menu">
+          {authState?.isAuthenticated && (
+            <>
+              <li><Link to="/profile" className="navbar-link">PROFILE</Link></li>
+              <li><Link to="/tokens" className="navbar-link">TOKENS</Link></li>
+            </>
+          )}
+        </ul>
+        <div className="navbar-auth">
+          {authState?.isAuthenticated ? (
+            <>
+              <span className="navbar-user">
+                {authState.idToken?.claims.name || authState.idToken?.claims.email}
+              </span>
+              <button onClick={handleLogout} className="navbar-button">
+                Logout
               </button>
-            )}
-          </div>
+            </>
+          ) : (
+            <button onClick={handleLogin} className="navbar-button">
+              Sign In
+            </button>
+          )}
         </div>
       </div>
-
-      {/* Main Navigation */}
-      <nav className="navbar">
-        <div className="navbar-container">
-          <Link to="/" className="navbar-logo">
-            <span className="logo-text">OKTA</span>
-          </Link>
-          <ul className="navbar-menu">
-            <li><Link to="/" className="navbar-link">PRODUCTS</Link></li>
-            <li><Link to="/" className="navbar-link">SOLUTIONS</Link></li>
-            <li><Link to="/" className="navbar-link">DEVELOPERS</Link></li>
-            {authState?.isAuthenticated && (
-              <>
-                <li><Link to="/profile" className="navbar-link">PROFILE</Link></li>
-                <li><Link to="/tokens" className="navbar-link">TOKENS</Link></li>
-              </>
-            )}
-          </ul>
-          <button className="navbar-search">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8"/>
-              <path d="M21 21l-4.35-4.35"/>
-            </svg>
-          </button>
-        </div>
-      </nav>
-    </>
+    </nav>
   );
 };
 
