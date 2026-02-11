@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useOktaAuth } from '@okta/okta-react';
+import apiClient from '../services/apiClient';
 import './Profile.css';
 
 const Profile = () => {
@@ -53,32 +54,32 @@ const Profile = () => {
     setUpdateMessage({ type: '', text: '' });
 
     try {
-      // Note: This requires proper Okta API access and configuration
-      // In a real application, you would call your backend API which would then
-      // update the user profile via Okta Management API
+      // Get access token from Okta
+      const accessToken = oktaAuth.getAccessToken();
 
-      // For demonstration purposes, we'll simulate the update
-      // In production, you'd need to:
-      // 1. Call your backend API endpoint
-      // 2. Backend validates the request and user authentication
-      // 3. Backend calls Okta Management API to update user profile
-      // 4. Backend returns success/failure response
+      if (!accessToken) {
+        throw new Error('No access token available');
+      }
 
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+      // Set auth token in API client
+      apiClient.setAuthToken(accessToken);
+
+      // Call backend API to update email
+      const result = await apiClient.updateEmail(newEmail);
 
       setUpdateMessage({
         type: 'success',
-        text: 'Email update request submitted. Please check your new email for verification.'
+        text: result.message || 'Email updated successfully'
       });
       setIsEditingEmail(false);
 
-      // In a real app, you would refresh the user info here
-      // oktaAuth.getUser().then(info => setUserInfo(info));
+      // Refresh user info from Okta
+      oktaAuth.getUser().then(info => setUserInfo(info));
 
     } catch (error) {
       setUpdateMessage({
         type: 'error',
-        text: 'Failed to update email. Please try again later.'
+        text: error.message || 'Failed to update email. Please try again later.'
       });
     } finally {
       setIsUpdating(false);
