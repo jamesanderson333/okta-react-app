@@ -1,0 +1,28 @@
+/* Container - minimal styling to fit in sidebar */
+.okta-widget-container {
+  background: #ffffff;
+  padding: 80px 40px 40px 40px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Only override button color to match our orange theme */
+.okta-widget-container .button-primary {
+  background: #fa6600 !important;
+}
+
+.okta-widget-container .button-primary:hover {
+  background: #e65200 !important;
+}
+
+/* Hide Okta branding beacon if present */
+.okta-widget-container .beacon-container {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .okta-widget-container {
+    padding: 60px 30px 30px 30px;
+  }
+}
