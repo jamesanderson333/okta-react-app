@@ -222,6 +222,134 @@
   font-family: 'Courier New', monospace;
 }
 
+/* Email Edit Functionality */
+.email-item {
+  grid-column: span 2;
+}
+
+.email-display {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.edit-email-btn {
+  padding: 6px 16px;
+  background: #fa6600;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.edit-email-btn:hover {
+  background: #e65200;
+  transform: translateY(-1px);
+}
+
+.email-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.email-input {
+  padding: 12px 16px;
+  border: 2px solid #dddddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #000000;
+  transition: border-color 0.3s;
+  width: 100%;
+  max-width: 400px;
+}
+
+.email-input:focus {
+  outline: none;
+  border-color: #fa6600;
+}
+
+.email-input:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.email-edit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.save-email-btn,
+.cancel-email-btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.save-email-btn {
+  background: #4caf50;
+  color: #ffffff;
+}
+
+.save-email-btn:hover:not(:disabled) {
+  background: #45a049;
+  transform: translateY(-1px);
+}
+
+.save-email-btn:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+.cancel-email-btn {
+  background: #f5f5f5;
+  color: #000000;
+  border: 2px solid #dddddd;
+}
+
+.cancel-email-btn:hover:not(:disabled) {
+  background: #eeeeee;
+  border-color: #000000;
+}
+
+.cancel-email-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Update Message */
+.update-message {
+  padding: 16px 20px;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  font-size: 0.938rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.update-message.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.update-message.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
 /* Profile Actions */
 .profile-actions {
   padding: 40px;
@@ -299,6 +427,33 @@
   .info-grid {
     grid-template-columns: 1fr;
     gap: 25px;
+  }
+
+  .email-item {
+    grid-column: span 1;
+  }
+
+  .email-display {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .edit-email-btn {
+    align-self: flex-start;
+  }
+
+  .email-input {
+    max-width: 100%;
+  }
+
+  .email-edit-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .save-email-btn,
+  .cancel-email-btn {
+    width: 100%;
   }
 
   .security-grid {

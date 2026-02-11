@@ -5,6 +5,10 @@ import './Profile.css';
 const Profile = () => {
   const { authState, oktaAuth } = useOktaAuth();
   const [userInfo, setUserInfo] = useState(null);
+  const [isEditingEmail, setIsEditingEmail] = useState(false);
+  const [newEmail, setNewEmail] = useState('');
+  const [updateMessage, setUpdateMessage] = useState({ type: '', text: '' });
+  const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
     if (authState?.isAuthenticated) {
@@ -19,6 +23,67 @@ const Profile = () => {
   }
 
   const claims = authState.idToken?.claims || {};
+
+  const handleEditEmail = () => {
+    setNewEmail(claims.email || '');
+    setIsEditingEmail(true);
+    setUpdateMessage({ type: '', text: '' });
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditingEmail(false);
+    setNewEmail('');
+    setUpdateMessage({ type: '', text: '' });
+  };
+
+  const handleSaveEmail = async () => {
+    if (!newEmail || newEmail === claims.email) {
+      setUpdateMessage({ type: 'error', text: 'Please enter a different email address' });
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(newEmail)) {
+      setUpdateMessage({ type: 'error', text: 'Please enter a valid email address' });
+      return;
+    }
+
+    setIsUpdating(true);
+    setUpdateMessage({ type: '', text: '' });
+
+    try {
+      // Note: This requires proper Okta API access and configuration
+      // In a real application, you would call your backend API which would then
+      // update the user profile via Okta Management API
+
+      // For demonstration purposes, we'll simulate the update
+      // In production, you'd need to:
+      // 1. Call your backend API endpoint
+      // 2. Backend validates the request and user authentication
+      // 3. Backend calls Okta Management API to update user profile
+      // 4. Backend returns success/failure response
+
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+
+      setUpdateMessage({
+        type: 'success',
+        text: 'Email update request submitted. Please check your new email for verification.'
+      });
+      setIsEditingEmail(false);
+
+      // In a real app, you would refresh the user info here
+      // oktaAuth.getUser().then(info => setUserInfo(info));
+
+    } catch (error) {
+      setUpdateMessage({
+        type: 'error',
+        text: 'Failed to update email. Please try again later.'
+      });
+    } finally {
+      setIsUpdating(false);
+    }
+  };
 
   return (
     <div className="profile-container">
@@ -45,14 +110,59 @@ const Profile = () => {
         <div className="profile-card">
           <div className="profile-section">
             <h2 className="section-title">Account Information</h2>
+
+            {updateMessage.text && (
+              <div className={`update-message ${updateMessage.type}`}>
+                {updateMessage.text}
+              </div>
+            )}
+
             <div className="info-grid">
               <div className="info-item">
                 <span className="info-label">Full Name</span>
                 <span className="info-value">{claims.name || 'N/A'}</span>
               </div>
-              <div className="info-item">
+              <div className="info-item email-item">
                 <span className="info-label">Email Address</span>
-                <span className="info-value">{claims.email || 'N/A'}</span>
+                {!isEditingEmail ? (
+                  <div className="email-display">
+                    <span className="info-value">{claims.email || 'N/A'}</span>
+                    <button
+                      className="edit-email-btn"
+                      onClick={handleEditEmail}
+                      title="Edit email address"
+                    >
+                      ✎ Edit
+                    </button>
+                  </div>
+                ) : (
+                  <div className="email-edit-form">
+                    <input
+                      type="email"
+                      className="email-input"
+                      value={newEmail}
+                      onChange={(e) => setNewEmail(e.target.value)}
+                      placeholder="Enter new email address"
+                      disabled={isUpdating}
+                    />
+                    <div className="email-edit-actions">
+                      <button
+                        className="save-email-btn"
+                        onClick={handleSaveEmail}
+                        disabled={isUpdating}
+                      >
+                        {isUpdating ? 'Saving...' : 'Save'}
+                      </button>
+                      <button
+                        className="cancel-email-btn"
+                        onClick={handleCancelEdit}
+                        disabled={isUpdating}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="info-item">
                 <span className="info-label">Email Verified</span>

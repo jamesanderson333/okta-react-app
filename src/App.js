@@ -1,8 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { Security, LoginCallback } from '@okta/okta-react';
 import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
-import { useNavigate } from 'react-router-dom';
 import oktaConfig from './config/oktaConfig';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
@@ -14,7 +13,7 @@ import './App.css';
 
 const oktaAuth = new OktaAuth(oktaConfig);
 
-function App() {
+function AppRoutes() {
   const navigate = useNavigate();
 
   const restoreOriginalUri = async (_oktaAuth, originalUri) => {
@@ -51,12 +50,12 @@ function App() {
   );
 }
 
-function AppWithRouter() {
+function App() {
   return (
     <Router>
-      <App />
+      <AppRoutes />
     </Router>
   );
 }
 
-export default AppWithRouter;
+export default App;

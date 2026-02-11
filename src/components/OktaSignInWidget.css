@@ -1,28 +1,149 @@
-/* Container - minimal styling to fit in sidebar */
+/* Container - Premium Modal Styling */
 .okta-widget-container {
   background: #ffffff;
-  padding: 80px 40px 40px 40px;
+  padding: 70px 50px 50px 50px;
   width: 100%;
-  height: 100%;
   position: relative;
+  border-radius: 8px;
 }
 
-/* Only override button color to match our orange theme */
-.okta-widget-container .button-primary {
+/* Style the Sign In title */
+.okta-widget-container h2,
+.okta-widget-container .okta-form-title {
+  font-size: 2.5rem !important;
+  font-weight: 900 !important;
+  color: #000000 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  margin-bottom: 30px !important;
+  text-align: center !important;
+}
+
+/* Form labels */
+.okta-widget-container .okta-form-label,
+.okta-widget-container label {
+  font-weight: 600 !important;
+  color: #333333 !important;
+  font-size: 0.938rem !important;
+  margin-bottom: 8px !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* Input fields */
+.okta-widget-container input[type="text"],
+.okta-widget-container input[type="password"],
+.okta-widget-container input[type="email"] {
+  border: 2px solid #dddddd !important;
+  border-radius: 6px !important;
+  padding: 14px 16px !important;
+  font-size: 1rem !important;
+  transition: all 0.3s !important;
+}
+
+.okta-widget-container input[type="text"]:focus,
+.okta-widget-container input[type="password"]:focus,
+.okta-widget-container input[type="email"]:focus {
+  border-color: #fa6600 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(250, 102, 0, 0.1) !important;
+}
+
+/* Input spacing */
+.okta-widget-container .o-form-input-name-username,
+.okta-widget-container .o-form-input-name-password,
+.okta-widget-container .o-form-input-name-identifier,
+.okta-widget-container .o-form-input {
+  margin-bottom: 24px !important;
+}
+
+/* Sign In button - Premium styling */
+.okta-widget-container .button-primary,
+.okta-widget-container button[type="submit"] {
   background: #fa6600 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 16px 24px !important;
+  font-size: 1.125rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  width: 100% !important;
+  margin-top: 30px !important;
+  transition: all 0.3s !important;
+  box-shadow: 0 4px 12px rgba(250, 102, 0, 0.2) !important;
 }
 
-.okta-widget-container .button-primary:hover {
+.okta-widget-container .button-primary:hover,
+.okta-widget-container button[type="submit"]:hover {
   background: #e65200 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(250, 102, 0, 0.3) !important;
 }
 
-/* Hide Okta branding beacon if present */
+/* Checkbox styling */
+.okta-widget-container input[type="checkbox"] {
+  accent-color: #fa6600 !important;
+  width: 18px !important;
+  height: 18px !important;
+  cursor: pointer !important;
+}
+
+/* Links */
+.okta-widget-container a,
+.okta-widget-container .js-forgot-password,
+.okta-widget-container .link {
+  color: #666666 !important;
+  text-decoration: underline !important;
+  transition: color 0.3s !important;
+}
+
+.okta-widget-container a:hover,
+.okta-widget-container .js-forgot-password:hover,
+.okta-widget-container .link:hover {
+  color: #fa6600 !important;
+}
+
+/* Terms text */
+.okta-widget-container p,
+.okta-widget-container .auth-footer {
+  font-size: 0.875rem !important;
+  color: #999999 !important;
+  line-height: 1.6 !important;
+}
+
+/* Hide unnecessary elements */
 .okta-widget-container .beacon-container {
   display: none !important;
 }
 
+/* Error messages */
+.okta-widget-container .okta-form-infobox-error,
+.okta-widget-container .o-form-error-container {
+  background: #fff3f3 !important;
+  border-left: 4px solid #fa6600 !important;
+  border-radius: 4px !important;
+  padding: 12px 16px !important;
+  margin: 15px 0 !important;
+}
+
+/* Loading state */
+.okta-widget-container .okta-spinner {
+  border-color: rgba(250, 102, 0, 0.2) !important;
+  border-top-color: #fa6600 !important;
+}
+
 @media (max-width: 768px) {
   .okta-widget-container {
-    padding: 60px 30px 30px 30px;
+    padding: 60px 30px 40px 30px;
+  }
+
+  .okta-widget-container h2,
+  .okta-widget-container .okta-form-title {
+    font-size: 2rem !important;
+  }
+
+  .okta-widget-container .button-primary,
+  .okta-widget-container button[type="submit"] {
+    font-size: 1rem !important;
   }
 }

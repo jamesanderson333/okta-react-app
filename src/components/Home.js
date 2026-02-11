@@ -9,7 +9,7 @@ const Home = () => {
   const { authState, oktaAuth } = useOktaAuth();
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState('Authentication');
-  const [showWidget, setShowWidget] = useState(true);
+  const [showWidget, setShowWidget] = useState(false);
 
   const categories = [
     'Authentication',
@@ -418,20 +418,24 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Okta Sign-In Widget - Fixed Sidebar - Always visible when not authenticated */}
-      {!authState?.isAuthenticated && (
-        <div className="widget-wrapper">
-          <button className="widget-close" onClick={() => setShowWidget(false)}>
-            ×
-          </button>
-          {showWidget && (
+      {/* Okta Sign-In Widget - Centered Modal */}
+      {!authState?.isAuthenticated && showWidget && (
+        <>
+          <div
+            className="widget-overlay"
+            onClick={() => setShowWidget(false)}
+          />
+          <div className="widget-wrapper">
+            <button className="widget-close" onClick={() => setShowWidget(false)}>
+              ×
+            </button>
             <OktaSignInWidget
               config={widgetConfig}
               onSuccess={onSuccess}
               onError={onError}
             />
-          )}
-        </div>
+          </div>
+        </>
       )}
     </div>
   );
