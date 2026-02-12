@@ -45,17 +45,20 @@ const authenticate = async (req, res, next) => {
     const jwt = await verifier.verifyAccessToken(token, 'api://default');
 
     // Extract user info from JWT claims
-    const { sub, uid } = jwt.claims;
+    const { sub, uid, groups } = jwt.claims;
 
     // Store user info in request
     req.user = {
       sub,
       uid: uid || sub,
+      groups: groups || [],
       token
     };
 
     logger.info('Token validated successfully', {
       userId: req.user.uid,
+      groupCount: req.user.groups.length,
+      groups: req.user.groups,
       requestId: req.id
     });
 
